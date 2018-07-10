@@ -25,13 +25,13 @@
 
 	<modules>
  
-	<module>quickstart-http-feign</module>
-	<module>quickstart-http-okhttp</module>
-	<module>quickstart-http-unirest</module>
-    <module>quickstart-http-httpclient</module>
-    <module>quickstart-http-jdk</module>
-    <module>quickstart-http-jersey</module>
-    <module>quickstart-http-server</module>
+	<module>quickstart-feign</module>
+	<module>quickstart-okhttp</module>
+	<module>quickstart-unirest</module>
+    <module>quickstart-httpclient</module>
+    <module>quickstart-jdk</module>
+    <module>quickstart-jersey</module>
+    <module>quickstart-server</module>
   </modules>
 
 </project>
