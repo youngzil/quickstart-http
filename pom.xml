@@ -30,7 +30,7 @@
 	<module>quickstart-unirest</module>
     <module>quickstart-httpclient</module>
     <module>quickstart-jdk</module>
-    <module>quickstart-jersey</module>
+    <module>quickstart-http-jersey</module>
     <module>quickstart-server</module>
   </modules>
 
