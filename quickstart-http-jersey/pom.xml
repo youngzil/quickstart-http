@@ -1,8 +1,5 @@
 <?xml version="1.0"?>
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<parent>
 		<groupId>org.quickstart</groupId>
 		<artifactId>quickstart-http</artifactId>
@@ -22,7 +19,7 @@
 		<glassfish.jersey.version>2.27</glassfish.jersey.version>
 		<!-- <sun.jersey.version>1.19.4</sun.jersey.version> -->
 		<sun.jersey.version>1.9.1</sun.jersey.version>
-		<jetty.version>9.4.9.v20180320</jetty.version>
+		<jetty.version>9.4.12.v20180830</jetty.version>
 	</properties>
 
 	<dependencies>
