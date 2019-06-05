@@ -3,7 +3,7 @@
  * 文件名：SendPostDemo.java
  * 版本信息：
  * 日期：2018年4月23日
- * Copyright asiainfo Corporation 2018
+ * Copyright yangzl Corporation 2018
  * 版权所有 *
  */
 package org.quickstart.http.jdk;
@@ -18,7 +18,7 @@ import java.net.URLEncoder;
 /**
  * SendPostDemo 
  *  
- * @author：yangzl@asiainfo.com
+ * @author：youngzil@163.com
  * @2018年4月23日 下午9:24:46 
  * @since 1.0
  */

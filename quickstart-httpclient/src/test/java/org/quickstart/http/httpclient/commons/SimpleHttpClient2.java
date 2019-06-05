@@ -3,7 +3,7 @@
  * 文件名：SimpleHttpClient2.java
  * 版本信息：
  * 日期：2018年4月23日
- * Copyright asiainfo Corporation 2018
+ * Copyright yangzl Corporation 2018
  * 版权所有 *
  */
 package org.quickstart.http.httpclient.commons;
@@ -19,7 +19,7 @@ import org.apache.commons.httpclient.methods.PostMethod;
 /**
  * SimpleHttpClient2 
  *  
- * @author：yangzl@asiainfo.com
+ * @author：youngzil@163.com
  * @2018年4月23日 下午9:18:10 
  * @since 1.0
  */

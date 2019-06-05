@@ -3,7 +3,7 @@
  * 文件名：RequestConfig.java
  * 版本信息：
  * 日期：2017年11月6日
- * Copyright asiainfo Corporation 2017
+ * Copyright yangzl Corporation 2017
  * 版权所有 *
  */
 package org.quickstart.http.okhttp.v2;
@@ -18,7 +18,7 @@ import com.squareup.okhttp.Response;
 /**
  * RequestConfig
  * 
- * @author：yangzl@asiainfo.com
+ * @author：youngzil@163.com
  * @2017年11月6日 下午3:49:40
  * @since 1.0
  */

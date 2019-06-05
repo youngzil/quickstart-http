@@ -4,7 +4,8 @@
 跨域解决方案：CORS
 CORS预检请求：OPTIONS方法，预检请求头和返回头
 
-2、
+2、跨域Cookie的解决方案
+
 3、
 
 
@@ -18,6 +19,7 @@ https://segmentfault.com/a/1190000006727486
 http://www.ruanyifeng.com/blog/2016/04/cors.html
 http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html
 https://juejin.im/post/5c46af87e51d4552232feaeb
+https://my.oschina.net/wsxiao/blog/1648996
 
 前端跨域问题（CORS）（Cross-Origin Resource Sharing）
 
@@ -126,11 +128,21 @@ Last-Modified: ???, 29 ?? 2019 11:51:17 CST
 
 
 
-
-
-
 ---------------------------------------------------------------------------------------------------------------------
+https://www.cnblogs.com/1020182600HENG/p/7121148.html
 
+
+Jquery的jsonp方式请求
+https://blog.csdn.net/hwhsong/article/details/84070918
+https://www.cnblogs.com/feiyuanxing/p/4575888.html
+https://www.cnblogs.com/chiangchou/p/jsonp.html
+
+
+
+跨域Cookie的解决方案：同Domain 和 不同Domain
+1、反向代理Nginx
+2、Jquery的jsonp方式请求：需要自己写脚本发起请求，然后写个回调函数处理数据，JQuery对于Ajax的跨域请求有两类解决方案，不过都是只支持get方式。分别是JQuery的 jquery.ajax jsonp格式和jquery.getScript方式。 
+3、CROS：前端会有预检请求，后端要有CORSFilter
 
 
 

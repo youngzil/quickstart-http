@@ -3,7 +3,7 @@
  * 文件名：User.java
  * 版本信息：
  * 日期：2018年4月23日
- * Copyright asiainfo Corporation 2018
+ * Copyright yangzl Corporation 2018
  * 版权所有 *
  */
 package org.quickstart.http.jersey.glassfish;
@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * User
  * 
- * @author：yangzl@asiainfo.com
+ * @author：youngzil@163.com
  * @2018年4月23日 下午11:29:46
  * @since 1.0
  */

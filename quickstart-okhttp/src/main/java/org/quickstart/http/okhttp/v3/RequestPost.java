@@ -3,7 +3,7 @@
  * 文件名：RequestPost.java
  * 版本信息：
  * 日期：2017年11月3日
- * Copyright asiainfo Corporation 2017
+ * Copyright yangzl Corporation 2017
  * 版权所有 *
  */
 package org.quickstart.http.okhttp.v3;
@@ -31,7 +31,7 @@ import okio.BufferedSink;
 /**
  * RequestPost
  * 
- * @author：yangzl@asiainfo.com
+ * @author：youngzil@163.com
  * @2017年11月3日 下午3:18:04
  * @since 1.0
  */

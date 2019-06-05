@@ -3,7 +3,7 @@
  * 文件名：HTTPServer.java
  * 版本信息：
  * 日期：2017年11月1日
- * Copyright asiainfo Corporation 2017
+ * Copyright yangzl Corporation 2017
  * 版权所有 *
  */
 package org.quickstart.httpserver;
@@ -18,7 +18,7 @@ import java.net.Socket;
 /**
  * HTTPServer
  * 
- * @author：yangzl@asiainfo.com
+ * @author：youngzil@163.com
  * @2017年11月1日 上午10:06:07
  * @since 1.0
  */
