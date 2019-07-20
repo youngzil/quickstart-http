@@ -19,6 +19,12 @@ HTTPS:ssl/tls加解密、防劫持
 SPDY:多路复用减低延迟、请求优先级、header压缩、基于HTTPS的加密协议传输、服务端推送（server push）
 HTTP2:二进制传输、多路复用（MultiPlexing）即连接共享、head压缩和缓存、服务端推送（server push）
 
+HTTPS是一种协议，等于HTTP+TLS（由于历史原因，SSL3.0之后就被TLS1.0替代了）。
+openssl是一套开源工具集，主要有两个特性：
+1、实现了ssl2,ssl3，TLSv1，TLSv1.1，TLSv1.2协议。
+2、实现目前常用的加密算法。
+没有一个非常精准的方法来判断HTTPS是否使用openssl，但是根据网站返回的server类型，可以大致估计是否使用了openssl，比如如果使用apache或者nginx，那么肯定是使用了openssl。保守估计至少70%以上的网站是使用openssl的。而windows系列的服务器包括IIS，windows server等都是使用schannel，没有使用openssl，不会受heartbleed影响。
+
 
 
 影响一个HTTP网络请求的因素主要有两个：带宽和延迟【浏览器最大连接数限制、DNS查询、建立连接和慢启动】。
