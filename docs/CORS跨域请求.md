@@ -20,6 +20,9 @@ http://www.ruanyifeng.com/blog/2016/04/cors.html
 http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html
 https://juejin.im/post/5c46af87e51d4552232feaeb
 https://my.oschina.net/wsxiao/blog/1648996
+https://www.smi1e.top/cross-origin-resource-sharing%EF%BC%88%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%EF%BC%89/
+
+
 
 前端跨域问题（CORS）（Cross-Origin Resource Sharing）
 
@@ -49,6 +52,11 @@ https://my.oschina.net/wsxiao/blog/1648996
 （1） Cookie、LocalStorage 和 IndexDB 无法读取。
 （2） DOM 无法获得。
 （3） AJAX 请求不能发送。
+
+
+浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request）。
+* 简单请求就是使用设定的请求方式请求数据
+* 而非简单请求则是在使用设定的请求方式请求数据之前,先发送一个OPTIONS请求,看服务端是否允许客户端发送非简单请求。只有"预检"通过后才会再发送一次请求用于数据传输
 
 
 CORS预检请求
@@ -92,6 +100,17 @@ Access-Control-Max-Age	否   单位是秒，这个响应头告诉我们这次预
 一般只要设置好 Access-Control-Allow-Origin就可以跨域了，其他的字段都是配合使用的（其他字段有默认值）。
 
 
+CORS(Cross-Origin Resource Sharing, 跨源资源共享)是W3C出的一个标准，其思想是使用自定义的HTTP头部让浏览器与服务器进行沟通，从而决定请求或响应是应该成功，还是应该失败。
+
+Access-Control-Allow-Origin: 允许跨域访问的域，可以是一个域的列表，也可以是通配符"*"。
+注意Origin规则只对域名有效，并不会对子目录有效。不同子域名需要分开设置。
+Access-Control-Allow-Credentials: 是否允许请求带有验证信息，这部分将会在下面详细解释
+Access-Control-Expose-Headers: 允许脚本访问的返回头，请求成功后，脚本可以在XMLHttpRequest中访问这些头的信息(貌似webkit没有实现这个)
+Access-Control-Max-Age: 缓存此次请求的秒数。在这个时间范围内，所有同类型的请求都将不再发送预检请求而是直接使用此次返回的头作为判断依据，非常有用，大幅优化请求次数
+Access-Control-Allow-Methods: 允许使用的请求方法，以逗号隔开
+Access-Control-Allow-Headers: 允许自定义的头部，以逗号隔开，大小写不敏感
+
+
 
 预检请求头信息：
 Origin 首部字段表明预检请求或实际请求的源站。
@@ -128,8 +147,35 @@ Last-Modified: ???, 29 ?? 2019 11:51:17 CST
 
 
 
+
+---------------------------------------------------------------------------------------------------------------------
+
+CRSF跨站请求伪造
+CSRF（Cross-site request forgery）跨站请求伪造，也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种对网站的恶意利用。
+CSRF是一种夹持用户在已经登陆的web应用程序上执行非本意的操作的攻击方式。相比于XSS，CSRF是利用了系统对页面浏览器的信任，XSS则利用了系统对用户的信任。
+
+
+尽管听起来像跨站脚本（XSS），但它与XSS非常不同，XSS利用站点内的信任用户，而CSRF则通过伪装来自受信任用户的请求来利用受信任的网站。
+
+XSS是跨站脚本攻击(Cross Site Scripting)，恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页之时，嵌入其中Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。
+
+CSRF的全称是“跨站请求伪造”，而 XSS 的全称是“跨站脚本”。看起来有点相似，它们都是属于跨站攻击——不攻击服务器端而攻击正常访问网站的用户，但它们的攻击类型是不同维度上的分类。CSRF 顾名思义，是伪造请求，冒充用户在站内的正常操作。
+
+
+XSS中的过滤是在前端怎么做？
+前端防xss分两类：1是提交数据的时候, 2是渲染数据的时候。
+
+提交数据, 即post表单, 或者ajax提交数据的时候, 对用户输入的内容进行过滤, 当前由于是前端操作, 随便找个懂点的都可以通过模拟请求绕过, 但是做还是要做。
+
+渲染数据, 这个是重点, 哪怕提交数据时, 被绕过(后端也没有处理), 渲染时予以过滤, 也能达到效果, 这里一般指ajax+template, 或者各种mvvm框架, 对于是用户提供的内容, 能用text方法的, 一律用text方法, 一定要用html方法的, 则进行数据过滤。
+
+参考
+https://www.jianshu.com/p/d5423f930c73
+https://chuenwei.github.io/2016/08/02/xss-crsf/
+
 ---------------------------------------------------------------------------------------------------------------------
 https://www.cnblogs.com/1020182600HENG/p/7121148.html
+http://byteliu.com/2019/04/11/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB-CORS-%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/
 
 
 Jquery的jsonp方式请求
@@ -143,6 +189,12 @@ https://www.cnblogs.com/chiangchou/p/jsonp.html
 1、反向代理Nginx
 2、Jquery的jsonp方式请求：需要自己写脚本发起请求，然后写个回调函数处理数据，JQuery对于Ajax的跨域请求有两类解决方案，不过都是只支持get方式。分别是JQuery的 jquery.ajax jsonp格式和jquery.getScript方式。 
 3、CROS：前端会有预检请求，后端要有CORSFilter
+前端发起ajax的时候，设置withCredentials:true，让浏览器发送请求的时候带着cookie
+后端接受请求的时候，设置
+// 让服务器接受cookie
+header(“Access-Control-Allow-Credentials:true”);
+//可接受的源里面包含要发过来cookie的源。
+header(“Access-Control-Allow-Origin: http://account.tcs-y.com");
 
 
 
