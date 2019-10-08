@@ -21,7 +21,7 @@ http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html
 https://juejin.im/post/5c46af87e51d4552232feaeb
 https://my.oschina.net/wsxiao/blog/1648996
 https://www.smi1e.top/cross-origin-resource-sharing%EF%BC%88%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%EF%BC%89/
-
+https://blog.csdn.net/qq_31617637/article/details/72955239
 
 
 前端跨域问题（CORS）（Cross-Origin Resource Sharing）
@@ -174,6 +174,8 @@ https://www.jianshu.com/p/d5423f930c73
 https://chuenwei.github.io/2016/08/02/xss-crsf/
 
 ---------------------------------------------------------------------------------------------------------------------
+cookie跨域共享参考
+
 https://www.cnblogs.com/1020182600HENG/p/7121148.html
 http://byteliu.com/2019/04/11/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB-CORS-%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/
 
