@@ -141,9 +141,21 @@ Content-Type: application/vnd.sun.wadl+xml
 Last-Modified: ???, 29 ?? 2019 11:51:17 CST
 
 
+Date: Sat, 12 Oct 2019 09:38:57 GMT
+access-control-allow-origin: http://test.runtime.vortex.zj.chinamobile.com:8000
+vary: origin
+access-control-allow-methods: HEAD,POST,GET,PUT
+access-control-allow-headers: "X-Requested-With,Content-Type,Accept,Origin,appId,appid,operId,operid,sign,timestamp,method,format,version,accessToken,accesstoken,openId,openid,busiSerial,busiserial,pageCode,pagecode"
+access-control-allow-credentials: true
+access-control-max-age: 86400
+Content-Length: 0
+Connection: Keep-alive
+Via: 1.1 ID-5003323700051215 uproxy-2
+
 
 问题
 1、Access-Control-Max-Age不起作用，客户端是否禁用缓存：Disable cache
+2、access-control-allow-headers设置成*不是匹配全部的意思，跨域请求头设置*无效
 
 
 

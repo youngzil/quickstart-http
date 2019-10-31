@@ -1,5 +1,7 @@
-原项目地址
-https://gitee.com/youngzil/quickstart-all
+项目地址
+https://github.com/youngzil/quickstart-http
+
+
 
 
 TCP：三次握手四次挥手、 DNS 查询、慢启动（TCP拥塞控制）、、、
