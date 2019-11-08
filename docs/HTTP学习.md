@@ -1,7 +1,7 @@
 1、TCPIP网络传输学习.md
 2、Cannot assign requested address问题总结
 3、tcpdump抓包分析和Wireshark分析
-4、
+4、故障的表现是负载均衡无法与后端主机nginx无法建立TCP连接。通过抓包发现SYN包无反回，产生大量重送。
 5、
 6、
 7、
@@ -121,8 +121,22 @@ tcpdump抓包分析和Wireshark分析
 
 ---------------------------------------------------------------------------------------------------------------------
 
+故障的表现是负载均衡无法与后端主机nginx无法建立TCP连接。通过抓包发现SYN包无反回，产生大量重送。
 
+通过netstat -s|grep reject可看到
+passive connections rejected because of  time stamp
+packets rejects in established  connections because of timestamp
 
+查询nginx主机tcp配置可见
+net.ipv4.tcp_tw_recycle = 1
+该配置(tcp_timestamps默认开启)可使服务主机缓存每个客户主机最新的时间戳。后续请求中如果时间戳小于缓存的时间戳，即视为无效而被丢弃。
+但是当多个客户端通过NAT方式联网，并服务端交互时，服务端看到的是同一个IP，这些客户端等同于一个。而这些客户端的时间戳可能存在差异，服务端直接丢弃时间戳小的数据包。
+tcp_tw_recycle改回默认值0后问题解决
+
+实际情况是尝试了各种办法都无法解决问题，最后对比了网关故障主机和其他正常主机TCP配置差异后，尝试修改后发现可用。以上分析是我事后猜的。
+
+net.ipv4.tcp_tw_recycle = 0
+net.ipv4.tcp_tw_reuse = 0
 
 
 

@@ -26,7 +26,7 @@ http响应码
   数据流测量：netstat
 
 10、TCP流程
-11、
+11、网络优化之net.ipv4.tcp_tw_recycle参数
 12、
 13、
 14、
@@ -493,5 +493,55 @@ https://www.cnblogs.com/ianthe/articles/3658307.html
 netstat命令详解
 https://blog.csdn.net/m0_37556444/article/details/83000553
 https://blog.csdn.net/shaochenshuo/article/details/56665641
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+网络优化之net.ipv4.tcp_tw_recycle参数
+
+表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。
+这个只能用在Client，解决client可用端口不够用情况，Cannot assign requested address问题
+不能用在Server，并且不能用在NAT后端的Client，对于位于NAT设备后面的Client来说，是一场灾难——会导到NAT设备后面的Client连接Server不稳定（有的Client能连接server，有的Client不能连接server）。
+
+
+
+参考/Users/yangzl/git/quickstart-http/docs/HTTP学习.md中的
+Cannot assign requested address问题总结：压测出现的问题
+
+
+在NAT(Network Address Translation)网络下，会导致大量的TCP连接建立错误。
+
+当tcp_tw_recycle开启时（tcp_timestamps同时开启，快速回收socket的效果达到），对于位于NAT设备后面的Client来说，是一场灾难——会导到NAT设备后面的Client连接Server不稳定（有的Client能连接server，有的Client不能连接server）。也就是说，tcp_tw_recycle这个功能，是为“内部网络”（网络环境自己可控——不存在NAT的情况）设计的，对于公网，不宜使用。
+
+通常，“回收”TIME_WAIT状态的socket是因为“无法主动连接远端”，因为无可用的端口，而不应该是要回收内存（没有必要）。即，需求是“Client”的需求，Server会有“端口不够用”的问题吗？除非是前端机，需要大量的连接后端服务——即充当着Client的角色。
+正确的解决这个总是办法应该是：
+net.ipv4.ip_local_port_range = 9000 6553 #默认值范围较小
+net.ipv4.tcp_max_tw_buckets = 10000 #默认值较小，还可适当调小
+net.ipv4.tcp_tw_reuse = 1 #
+net.ipv4.tcp_fin_timeout = 10 #
+
+
+
+net.ipv4.tcp_tw_reuse = 1 表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭；
+net.ipv4.tcp_tw_recycle = 1 表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。
+需要net.ipv4.tcp_timestamps（默认开启的）这个开关开启才有效果。
+
+
+参考
+https://blog.csdn.net/enweitech/article/details/79261439
+https://blog.csdn.net/qw3672939/article/details/83746604
+
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------
+
 
 
