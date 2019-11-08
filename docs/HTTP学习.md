@@ -1,6 +1,6 @@
 1、TCPIP网络传输学习.md
 2、Cannot assign requested address问题总结
-3、
+3、tcpdump抓包分析和Wireshark分析
 4、
 5、
 6、
@@ -55,6 +55,25 @@ net.ipv4.tcp_fin_timeout = 30  修改系統默认的TIMEOUT时间，默认是60
 
 
 
+
+sysctl -w net.ipv4.ip_forward=1
+sysctl -w net.ipv4.tcp_fin_timeout=10
+sysctl -w net.ipv4.tcp_timestamps=1
+sysctl -w net.ipv4.tcp_tw_recycle=1
+sysctl -w net.ipv4.tcp_tw_reuse = 1
+
+
+编辑 /etc/sysctl.conf 文件，加入参数内容
+net.ipv4.ip_forward=1
+net.ipv4.tcp_fin_timeout=10
+net.ipv4.tcp_timestamps=1
+net.ipv4.tcp_tw_recycle=1
+net.ipv4.tcp_tw_reuse=1
+编辑完成后执行命令 /sbin/sysctl -p  让参数立即生效。
+
+
+
+
 修改方式：
 
 编辑 /etc/sysctl.conf 文件，加入参数内容，以上5个参数是我查到的认为有效的结果，然后我的实际情况仅修改了其中三个：
@@ -94,8 +113,10 @@ https://www.cnblogs.com/tongbk/p/10442595.html
 
 
 ---------------------------------------------------------------------------------------------------------------------
+tcpdump抓包分析和Wireshark分析
 
-
+参考
+/Users/yangzl/git/quickstart-framework/quickstart-document/doc/base/Wireshark和tcpdump监控.md
 
 
 ---------------------------------------------------------------------------------------------------------------------
