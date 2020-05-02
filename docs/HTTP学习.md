@@ -144,7 +144,10 @@ net.ipv4.tcp_tw_reuse = 0
 Http讲解  
   
 https://developer.mozilla.org/zh-CN/docs/Web/HTTP  
-  
+https://blog.csdn.net/qzcsu/article/details/72861891
+
+
+
   
 ---------------------------------------------------------------------------------------------------------------------  
 
