@@ -1,6 +1,10 @@
+OkHttp
+Square针对Java和Kotlin精心打造的HTTP客户端。 
+
+
 1、
 https://github.com/square/okhttp
-http://square.github.io/okhttp/
+https://square.github.io/okhttp/
 http://square.github.io/
 
 测试使用quickstart-httpserver作为服务端

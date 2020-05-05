@@ -1,3 +1,6 @@
+http响应头里没有或者有content-length的几种可能性
+
+
 我们遇到的问题，使用reactor-netty作为Http的客户端，默认使用请求头中transfer-encoding: chunked，并且设置tcpClient的.chunkedTransfer(false)不生效，
 发现是源码里面对POST请求强制使用transfer-encoding: chunked传输
 后面升级reactor-netty的版本解决生效问题，不使用transfer-encoding传输

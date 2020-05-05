@@ -1,3 +1,5 @@
+TCP和UDP的最完整的区别
+
 TCP（Transmission Control Protocol，传输控制协议）是面向连接的协议，也就是说，在收发数据前，必须和对方建立可靠的连接。 一个TCP连接必须要经过三次“对话”才能建立起来，其中的过程非常复杂， 只简单的描述下这三次对话的简单过程：  
   
 UDP（User Data Protocol，用户数据报协议）  

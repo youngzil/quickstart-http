@@ -1,3 +1,5 @@
+AsyncAPI（异步API）的设计
+
 异步API的设计,AsyncAPI
 AsyncAPI就是这样一种选择。本质上，AsyncAPI是消息传递范例的替代品，它是OpenAPI或RAML的替代品。
 

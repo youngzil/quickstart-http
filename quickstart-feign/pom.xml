@@ -15,7 +15,8 @@
 	<packaging>jar</packaging>
 	<name>${project.artifactId}-${project.version}</name>
 	<url>http://maven.apache.org</url>
-	<description>Demo project for XXX </description>
+
+  <description>Demo project for XXX </description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

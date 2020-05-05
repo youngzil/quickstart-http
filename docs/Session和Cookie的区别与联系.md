@@ -1,3 +1,6 @@
+Session和Cookie的区别与联系
+
+
 客户端浏览器禁用Cookie，怎么跟踪会话
 Cookie和Session区别
 session跨域共享

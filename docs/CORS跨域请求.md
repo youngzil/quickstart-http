@@ -1,18 +1,31 @@
+CORS跨域请求
+
 1、前端跨域问题（CORS）                
 跨域定义：协议、域名、端口等，跨域是客户端浏览器独有的                
+何为同源（同域）：如果两个页面的协议，端口（如果有指定）和域名都相同，则两个页面具有相同的源。                
+不同源就是跨域：不同协议 ( https和http )、不同端口 ( 81和80)、不同域名 ( news和store )
 跨域限制：安全机制，限制的行为：Cookie、LocalStorage 和 IndexDB 无法读取、DOM 无法获得、AJAX 请求不能发送                
+浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request）。                
 跨域解决方案：CORS                
 CORS预检请求：OPTIONS方法，预检请求头和返回头                
                 
 2、跨域Cookie的解决方案                
-                
-3、                
-                
-                
-                
-                
-                
-                
+跨域Cookie的解决方案：同Domain 和 不同Domain
+同Domain
+	直接写在父Domain中
+不同Domain
+	1、反向代理Nginx
+	2、Jquery的jsonp方式请求
+	3、CROS：前端会有预检请求，后端要有CORSFilter
+	
+	
+3、CRSF跨站请求伪造和XSS攻击                
+CSRF（Cross-site request forgery）跨站请求伪造：利用了系统对页面浏览器的信任（通过cookie伪装）              
+XSS：Cross-Site Scripting（跨站脚本攻击）：XSS利用站点内的信任用户（伪装已经认证的用户）              
+Click劫持：利用了HTML中<iframe>标签的透明属性
+
+
+
 ---------------------------------------------------------------------------------------------------------------------                
 https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS                
 https://segmentfault.com/a/1190000006727486                

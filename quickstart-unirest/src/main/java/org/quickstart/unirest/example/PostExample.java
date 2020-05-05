@@ -173,10 +173,12 @@ public class PostExample {
         Future<HttpResponse<JsonNode>> future =
                 Unirest.post("http://httpbin.org/post").header("accept", "application/json").field("param1", "value1").field("param2", "value2").asJsonAsync(new Callback<JsonNode>() {
 
+                    @Override
                     public void failed(UnirestException e) {
                         System.out.println("The request has failed");
                     }
 
+                    @Override
                     public void completed(HttpResponse<JsonNode> response) {
                         int code = response.getStatus();
                         Map<String, List<String>> headers = response.getHeaders();
@@ -189,6 +191,7 @@ public class PostExample {
                         System.out.println("rawBody=" + rawBody);
                     }
 
+                    @Override
                     public void cancelled() {
                         System.out.println("The request has been cancelled");
                     }

@@ -1,3 +1,7 @@
+Java中的Unirest：简化的轻量级HTTP客户端库。 
+http://kong.github.io/unirest-java/
+
+
 http://unirest.io/java.html
 https://github.com/Kong/unirest-java
 测试使用quickstart-httpserver作为服务端
