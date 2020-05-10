@@ -25,6 +25,21 @@ XSS：Cross-Site Scripting（跨站脚本攻击）：XSS利用站点内的信任
 Click劫持：利用了HTML中<iframe>标签的透明属性
 
 
+浏览器同源策略与跨域请求
+XSS攻击原理及防御措施
+如何使用SpringSecurity防御CSRF攻击
+CC/DDOS攻击与流量攻击
+什么是 SSL TLS HTTPS？
+
+
+Csrf Token
+用户登录时，系统发放一个CsrfToken值，用户携带该CsrfToken值与用户名、密码等参数完成登录。系统记录该会话的 CsrfToken 值，之后在用户的任何请求中，都必须带上该CsrfToken值，并由系统进行校验。
+这种方法需要与前端配合，包括存储CsrfToken值，以及在任何请求中（包括表单和Ajax）携带CsrfToken值。安全性相较于HTTP Referer提高很多，如果都是XMLHttpRequest，则可以统一添加CsrfToken值；但如果存在大量的表单和a标签，就会变得非常烦琐。
+
+SpringSecurity中使用Csrf Token
+Spring Security通过注册一个CsrfFilter来专门处理CSRF攻击，在Spring Security中，CsrfToken是一个用于描述Token值，以及验证时应当获取哪个请求参数或请求头字段的接口
+
+
 
 ---------------------------------------------------------------------------------------------------------------------                
 https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS                
@@ -173,14 +188,20 @@ Via: 1.1 ID-5003323700051215 uproxy-2
                 
                 
                 
----------------------------------------------------------------------------------------------------------------------                
-                
+---------------------------------------------------------------------------------------------------------------------
+
 CRSF跨站请求伪造和XSS攻击              
 CSRF（Cross-site request forgery）跨站请求伪造：利用了系统对页面浏览器的信任（通过cookie伪装）              
 XSS：Cross-Site Scripting（跨站脚本攻击）：XSS利用站点内的信任用户（伪装已经认证的用户）              
 Click劫持：利用了HTML中<iframe>标签的透明属性              
-              
-              
+
+浏览器同源策略与跨域请求
+XSS攻击原理及防御措施
+如何使用SpringSecurity防御CSRF攻击
+CC/DDOS攻击与流量攻击
+什么是 SSL TLS HTTPS？
+
+
 构成CSRF攻击是有条件的：              
 1、客户端必须一个网站并生成cookie凭证存储在浏览器中              
 2、该cookie没有清除，客户端又tab一个页面进行访问别的网站              
@@ -220,13 +241,18 @@ X-Frame-Options 的兼容性非常好，基本上现在市面所有浏览器都�
 
 
 
-                
-CSRF（Cross-site request forgery）跨站请求伪造，也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种对网站的恶意利用。                
+
+
+
+CSRF（Cross-site request forgery）跨站请求伪造，也被称为One Click Attack或者Session Riding，通常缩写为CSRF或XSRF，是一种对网站的恶意利用。
+尽管听起来像跨站脚本（XSS），但它与XSS非常不同，XSS利用站点内的信任用户，而CSRF则通过伪装成受信任用户的请求来利用受信任的网站。
+与XSS攻击相比，CSRF攻击往往不大流行（因此对其进行防范的资源也相当稀少）和难以防范，所以被认为比XSS更具危险性。 
+CSRF是一种依赖web浏览器的、被混淆过的代理人攻击（deputy attack）。
+
+
+
 CSRF是一种夹持用户在已经登陆的web应用程序上执行非本意的操作的攻击方式。相比于XSS，CSRF是利用了系统对页面浏览器的信任，XSS则利用了系统对用户的信任。                
-                
-                
-尽管听起来像跨站脚本（XSS），但它与XSS非常不同，XSS利用站点内的信任用户，而CSRF则通过伪装来自受信任用户的请求来利用受信任的网站。                
-                
+
 XSS是跨站脚本攻击(Cross Site Scripting)，恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页之时，嵌入其中Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。                
                 
 CSRF的全称是“跨站请求伪造”，而 XSS 的全称是“跨站脚本”。看起来有点相似，它们都是属于跨站攻击——不攻击服务器端而攻击正常访问网站的用户，但它们的攻击类型是不同维度上的分类。CSRF 顾名思义，是伪造请求，冒充用户在站内的正常操作。                
@@ -271,19 +297,175 @@ Click劫持:
 
 
 
+浏览器同源策略与跨域请求
+XSS攻击原理及防御措施
+如何使用SpringSecurity防御CSRF攻击
+
+Csrf Token
+用户登录时，系统发放一个CsrfToken值，用户携带该CsrfToken值与用户名、密码等参数完成登录。系统记录该会话的 CsrfToken 值，之后在用户的任何请求中，都必须带上该CsrfToken值，并由系统进行校验。
+这种方法需要与前端配合，包括存储CsrfToken值，以及在任何请求中（包括表单和Ajax）携带CsrfToken值。安全性相较于HTTP Referer提高很多，如果都是XMLHttpRequest，则可以统一添加CsrfToken值；但如果存在大量的表单和a标签，就会变得非常烦琐。
+
+SpringSecurity中使用Csrf Token
+Spring Security通过注册一个CsrfFilter来专门处理CSRF攻击，在Spring Security中，CsrfToken是一个用于描述Token值，以及验证时应当获取哪个请求参数或请求头字段的接口
+
+
+
+CC/DDOS攻击与流量攻击
+CC攻击与DDOS攻击定义
+CC攻击与DDOS攻击原理：
+CC攻击与DDOS攻击方式
+CC攻击与DDOS攻击区别
+DDoS 攻击方式分类
+DDoS反射放大之SSDP攻击
+SYN Flood攻击(SYN洪水攻击)
+ACK FLOOD攻击
+Burpsuite的介绍与安装
+
+
+
+CC攻击与DDOS攻击定义：
+DDoS全称:分布式拒绝服务(DDoS:Distributed Denial of Service)。
+CC攻击全称Challenge Collapsar，中文意思是挑战黑洞，因为以前的抵抗DDoS攻击的安全设备叫黑洞，顾名思义挑战黑洞就是说黑洞拿这种攻击没办法，新一代的抗DDoS设备已经改名为ADS(Anti-DDoS System)，基本上已经可以完美的抵御CC攻击了。
+
+CC攻击与DDOS攻击原理：
+DDOS攻击:该攻击方式利用目标系统网络服务功能缺陷或者直接消耗其系统资源，使得该目标系统无法提供正常的服务。
+攻击者进行拒绝服务攻击，实际上让服务器实现两种效果：一是迫使服务器的缓冲区满，不接收新的请求；二是使用IP欺骗，迫使服务器把合法用户的连接复位，影响合法用户的连接。
+
+CC攻击的原理是通过代理服务器或者大量肉鸡模拟多个用户访问目标网站的动态页面，制造大量的后台数据库查询动作，消耗目标CPU资源，造成拒绝服务。
+CC不像DDoS可以用硬件防火墙来过滤攻击，CC攻击本身的请求就是正常的请求。
+
+
+CC攻击与DDOS攻击方式：
+二者的攻击方式主要分为三种：直接攻击、代理攻击、僵尸网络攻击
+
+
+CC攻击与DDOS攻击区别：
+DDoS攻击打的是网站的服务器，而CC攻击是针对网站的页面攻击的，用术语来说就是，一个是WEB网络层拒绝服务攻击（DDoS），一个是WEB应用层拒绝服务攻击（CC），
+网络层就是利用肉鸡的流量去攻击目标网站的服务器，针对比较本源的东西去攻击，服务器瘫痪了，那么运行在服务器上的网站肯定也不能正常访问了。
+而应用层就是我们用户看得到的东西，就比如说网页，CC攻击就是针对网页来攻击的，CC攻击本身是正常请求，网站动态页面的正常请求也会和数据库进行交互的，当这种"正常请求"达到一种程度的时候，服务器就会响应不过来，从而崩溃。
+
+
+CC攻击是DDOS(分布式拒绝服务)的一种，相比其它的DDOS攻击CC似乎更有技术含量一些。这种攻击你见不到虚假IP，见不到特别大的异常流量，但造成服务器无法进行正常连接，一条ADSL的普通用户足以挂掉一台高性能的Web服务器。由此可见其危害性，称其为"Web杀手"毫不为过。
+
+CC攻击:利用大量代理服务器对目标计算机发起大量连接，导致目标服务器资源枯竭造成拒绝服务。
+
+CC攻击模拟多个用户(多少线程就是多少用户)不停的进行访问(访问那些需要大量数据操作，就是需要大量CPU时间的页面).这一点用一个一般的性能测试软件就可以做到大量模拟用户并发。
+
+CC攻击，一般是针对数据库的，CC攻击者常常用某个页面，这个页面很特别，在使用这个页面的时候，会调用大量数据库资源，例如搜索，当用户在进行搜索的时候，搜索数据往往都会经过数据库对所有的数据进行检索，例如一个网站的数据库是500m，当用户在网站上面进行搜索的时候，就会调用整个网站的资源，这时候就需要数据库进行一一的比对，如果说这时候有大量的搜索命令，使得数据库无法处理，往往会导致服务器宕机
+
+CC攻击的原理就是攻击者控制某些主机不停地发大量数据包给对方服务器造成服务器资源耗尽，一直到宕机崩溃。
+
+DDOS是主要针对IP的攻击，而CC攻击的主要是网页。CC攻击相对来说，攻击的危害不是毁灭性的，但是持续时间长；而DDOS攻击就是流量攻击，这种攻击的危害性较大，通过向目标服务器发送大量数据包，耗尽其带宽，需要足够的带宽和硬件防火墙才能防御。
+
+
+
+Cc攻击是什么？
+CC = Challenge Collapsar，意为“挑战黑洞”，其前身名为Fatboy攻击，是利用不断对网站发送连接请求致使形成拒绝服务的目的。
+业界之所以把这种攻击称为CC(Challenge Collapsar)，是因为在DDOS攻击发展前期，绝大部分的DDOS攻击都能被业界知名的“黑洞”(Collapsar)抵挡住，而CC攻击的产生就是为了挑战“黑洞”，故而称之为Challenge Collapsar。
+攻击者通过代理服务器或者肉鸡向向受害主机不停地发大量数据包，造成对方服务器资源耗尽，一直到宕机崩溃。
+
+怎么判断自己是在被CC攻击
+CC攻击主要工作原理是耗资源，这就需要看是那种攻击方式，
+看抓包分析是否是通过多IP，刷新页面，如果是这是最典型的Cc攻击。
+
+如果cc攻击你网站打不开，指定会有一种资源耗尽，才会引发网站打不开，打开卡。
+可自行判断一下，是下列四种情况中的那一种。
+1，耗Cpu资源
+黑客用1万台肉鸡，刷新你网站动态页面，如果你程序不够健壮，cpu直接100%
+2，耗内存资源
+黑客只要刷新你动态页面中搜索数据库的内容，只要搜索量一大，内存占满。网站直接打不开或者是非常卡。
+3，耗I/o资源
+黑客找到上传文件，或者是下载文件的页面，在不停的上传与下载，磁盘资源点满
+4，耗带宽资源
+下面这个带宽接10G，攻击上来2G，能看流量占用多少，如果流量占满了，服务器直接掉包，掉线。网站一点都打不开。
+
+
+DDoS 攻击方式分类
+1、反射型：目前常见的反射攻击有：DNS 反射攻击、NTP 反射攻击、SSDP 反射攻击等。
+2、流量放大型
+通过递归等手法将攻击流量放大的攻击类型，比如：以反射型中常见的 SSDP 协议为例，攻击者将 Search type 设置为 ALL。搜索所有可用的设备和服务，这种递归效果产生的放大倍数是非常大的，攻击者只需要以较小的伪造源地址的查询流量就可以制造出几十甚至上百倍的应答流量发送至目标。
+3、混合型
+在实际情况中，攻击者只求达到打垮对方的目的。发展到现在，高级攻击者已经不倾向使用单一的攻击手段。而是根据目标系统的具体环境灵动组合，发动多种攻击手段。
+
+一般而言，我们会根据针对的协议类型和攻击方式的不同，把 DDoS 分成 SYN Flood、ACK Flood、Connection Flood、UDP Flood、NTP Flood、SSDP Flood、DNS Flood、HTTP Flood、ICMP Flood、CC 等各类攻击类型。
+
+
+DDoS反射放大之SSDP攻击
+SSDP全称Simple Sever Discovery Protocol，它自己都说它简单了，其实真的很简单。为啥我先说它呢，还是因为上面说的Web情结，它的本质是一个在UDP上面的HTTP协议
+之前一直搞Web安全，大家都知道使用BurpSuite抓包，一个请求对应一个响应，这是http协议定死了的。
+所以到了网络层，思维不能存在定势，一个请求包可能对应多个响应包，这也是TCP/IP协议允许的，反射放大就是基于这个原理。
+通过“以小博大”，“四两拨千斤”的姿态进行的DDoS攻击
+
+
+SYN Flood攻击(SYN洪水攻击)。
+SYN Flood攻击是一种典型的DoS（Denial of Service）攻击，是一种利用TCP协议缺陷，发送大量伪造的TCP连接请求，从而使被攻击方资源耗尽（CPU满负荷或内存不足）的攻击方式。
+该攻击将使服务器TCP连接资源耗尽，停止响应正常的TCP连接请求。
+ACK Flood攻击原理与SYN Flood攻击原理类似。
+
+
+ACK FLOOD攻击
+ack flood攻击同样是利用TCP三次握手的缺陷实现的攻击， ack flood攻击利用的是三次握手的第二段
+
+
+
+什么是 SSL TLS HTTPS？
+参考
+http和http2的区别.md
+
+
+
+
 CRSF参考                
 https://www.jianshu.com/p/d5423f930c73                
 https://chuenwei.github.io/2016/08/02/xss-crsf/                
-              
-              
+https://www.cnblogs.com/dalianpai/p/12393133.html
+
+
 浅谈XSS攻击原理与解决方法              
 https://www.cnblogs.com/shawWey/p/8480452.html              
 https://www.jianshu.com/p/4fcb4b411a66              
 https://blog.csdn.net/free_xiaochen/article/details/82289316              
 https://segmentfault.com/a/1190000016551188              
-              
-              
-                
+
+
+
+详解如何在spring boot中使用spring security防止CSRF攻击
+https://www.cnblogs.com/dalianpai/p/12393133.html
+https://www.jb51.net/article/139595.htm
+
+
+每秒百万级CC攻击—-DDOS 防御事件
+https://www.hi-linux.com/posts/50873.html#%E6%97%A0%E7%BA%BF-ddos-%E6%94%BB%E5%87%BB
+https://cshihong.github.io/2019/05/14/%E7%BD%91%E7%BB%9C%E5%B1%82-TCP-UDP-%E6%94%BB%E5%87%BB%E4%B8%8E%E9%98%B2%E5%BE%A1%E5%8E%9F%E7%90%86/
+https://zhuanlan.zhihu.com/p/53847917
+https://zhuanlan.zhihu.com/p/82817326
+https://blog.csdn.net/qq_34777600/article/details/81978262
+http://www.ruanyifeng.com/blog/2018/06/ddos.html
+https://www.infoq.cn/article/HR4dxexUuG7VU2TV1Ryk
+
+DDoS反射放大之SSDP攻击
+https://zhuanlan.zhihu.com/p/41573321
+
+
+
+SYN Flood攻击原理与防范
+https://blog.csdn.net/cpcpcp123/article/details/52739407
+SYN FLOOD攻击和ACK FLOOD攻击
+https://www.freebuf.com/column/132782.html
+https://blog.csdn.net/chenyulancn/article/details/78832613
+
+
+VDSL与ADSL的区别
+https://blog.csdn.net/sj349781478/article/details/74058936
+
+
+Burpsuite的介绍与安装
+burpsuite常被黑客用来进行网站渗透
+Burp Suite 是用于攻击web 应用程序的集成平台。它包含了许多工具，并为这些工具设计了许多接口，以促进加快攻击应用程序的过程。
+
+参考
+https://zhuanlan.zhihu.com/p/22369250
+
 ---------------------------------------------------------------------------------------------------------------------                
 cookie跨域共享参考                
                 
