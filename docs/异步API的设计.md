@@ -4,9 +4,6 @@ AsyncAPI（异步API）的设计
 AsyncAPI就是这样一种选择。本质上，AsyncAPI是消息传递范例的替代品，它是OpenAPI或RAML的替代品。
 
 
-
-
-
 AsyncAPI介绍
 AsyncAPI 是根据OpenAPI规范改编而来的
 
@@ -84,6 +81,8 @@ OpenAPI与语言无关，可用于自动生成有关各种功能，方法，参�
 
 AsyncAPI：
 https://www.asyncapi.com/docs/specifications/1.2.0/
+https://www.asyncapi.org/docs/getting-started/
+https://github.com/asyncapi/asyncapi
 
 AsyncAPI  最初是Hitch的一个辅助项目（API Changelog），后来由FranMéndez创建。AsyncAPI的开发人员发现消息驱动空间中缺少工具，因此，当为HTTP API提供大量相反的工具时，AsyncAPI决定文档规范中缺少标准化的部分。
 
