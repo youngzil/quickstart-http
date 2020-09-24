@@ -1,35 +1,4 @@
-1、TCPIP网络传输学习.md  
-2、Cannot assign requested address问题总结  
-3、网络抓包工具
-   1、tcpdump抓包分析和Wireshark分析 
-   2、Charles抓包神器
-5、服务端设置TCP参数端口重用带来的问题  
-6、  
-7、  
-8、  
-9、  
-10、  
-11、  
-12、  
-13、  
-14、  
-15、  
-16、  
-17、 
 
-浏览器同源策略与跨域请求
-XSS攻击原理及防御措施
-如何使用SpringSecurity 防御CSRF攻击
-CC/DDOS攻击与流量攻击
-什么是 SSL TLS HTTPS？
-参考
-http和http2的区别.md
-
-  
-  
-  
-  
-  
 ---------------------------------------------------------------------------------------------------------------------  
 Cannot assign requested address问题总结：压测出现的问题  
   
@@ -120,27 +89,7 @@ linux内核中存在两个参数：
 https://www.jianshu.com/p/51a953b789a4    
 https://www.cnblogs.com/tongbk/p/10442595.html    
   
-  
----------------------------------------------------------------------------------------------------------------------  
-网络抓包工具
-1、tcpdump抓包分析和Wireshark分析 
-2、Charles抓包神器
 
-
-tcpdump抓包分析和Wireshark分析  
-  
-参考  
-/Users/yangzl/git/notes/docs/framework/Wireshark和tcpdump监控.md  
-  
-
-
-
-Charles抓包神器
-
-参考
-/Users/yangzl/git/notes/docs/framework/Charles抓包神器.md
-
-  
 ---------------------------------------------------------------------------------------------------------------------  
 服务端设置TCP参数端口重用带来的问题
 
@@ -172,7 +121,14 @@ https://blog.csdn.net/qzcsu/article/details/72861891
 
 
 
-  
+一篇搞懂TCP、HTTP、Socket、Socket连接池
+https://segmentfault.com/a/1190000014044351
+https://blog.csdn.net/honghailiang888/article/details/51121257
+
+
+
+
+
 ---------------------------------------------------------------------------------------------------------------------  
 
 
