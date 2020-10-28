@@ -1,7 +1,13 @@
+- [Cannot assign requested address问题总结](#Cannot assign requested address问题总结)
+- [服务端设置TCP参数端口重用带来的问题](#服务端设置TCP参数端口重用带来的问题)
+
+
+
 
 ---------------------------------------------------------------------------------------------------------------------  
+## Cannot assign requested address问题总结
+
 Cannot assign requested address问题总结：压测出现的问题  
-  
   
 Caused by: java.net.ConnectException: Cannot assign requested address (connect failed)  
 由于程序对外建立新连接，结果本地端口已经用完导致的异常。  
@@ -61,7 +67,7 @@ net.ipv4.tcp_tw_recycle = 1
 编辑完成后执行命令 /sbin/sysctl -p  让参数立即生效。至于气他参数就看具体情况了。我这种修改方式是直接永久保存的，不会受网络服务重启，系统重启等的影响，若要临时修改请自行查询命令。    
     
     
-执行命令修改如下内核参数 （需要root权限）     
+执行命令修改如下内核参数 （需要root权限）    
     
 调低端口释放后的等待时间，默认为60s，修改为15~30s：    
 sysctl -w net.ipv4.tcp_fin_timeout=30    
@@ -79,8 +85,8 @@ sysctl -w net.ipv4.tcp_timestamps=1  开启对于TCP时间戳的支持,若该项
 sysctl -w net.ipv4.tcp_tw_recycle=1  表示开启TCP连接中TIME-WAIT sockets的快速回收    
     
 linux内核中存在两个参数：    
-      net.ipv4.tcp_tw_reuse = 1表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭；    
-      net.ipv4.tcp_tw_recycle = 1表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。    
+   net.ipv4.tcp_tw_reuse = 1表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭；    
+   net.ipv4.tcp_tw_recycle = 1表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。    
 在/etc/sysctl.conf文件中加入上述参数，然后执行/sbin/sysctl -p让参数生效。    
     
     
@@ -91,7 +97,7 @@ https://www.cnblogs.com/tongbk/p/10442595.html
   
 
 ---------------------------------------------------------------------------------------------------------------------  
-服务端设置TCP参数端口重用带来的问题
+## 服务端设置TCP参数端口重用带来的问题
 
 
 故障的表现是负载均衡无法与后端主机nginx无法建立TCP连接。通过抓包发现SYN包无反回，产生大量重送。  
@@ -165,8 +171,6 @@ https://www.cnblogs.com/Leslieblog/p/10413202.html
 Linux记录-TCP状态以及（TIME_WAIT/CLOSE_WAIT）分析
 https://www.cnblogs.com/xinfang520/p/8961129.html
 
----------------------------------------------------------------------------------------------------------------------  
-
 
 
 
@@ -175,12 +179,10 @@ quickstart-application-container
 quickstart-webservice  
   
 应用服务器：jboss、jetty、jersey、tomcat、weblogic、WebSphere、  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+

@@ -1,47 +1,36 @@
-CORS跨域请求
-
-1、前端跨域问题（CORS）                
-跨域定义：协议、域名、端口等，跨域是客户端浏览器独有的                
-何为同源（同域）：如果两个页面的协议，端口（如果有指定）和域名都相同，则两个页面具有相同的源。                
-不同源就是跨域：不同协议 ( https和http )、不同端口 ( 81和80)、不同域名 ( news和store )
-跨域限制：安全机制，限制的行为：Cookie、LocalStorage 和 IndexDB 无法读取、DOM 无法获得、AJAX 请求不能发送                
-浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request）。                
-跨域解决方案：CORS                
-CORS预检请求：OPTIONS方法，预检请求头和返回头                
-                
-2、跨域Cookie的解决方案                
-跨域Cookie的解决方案：同Domain 和 不同Domain
-同Domain
-	直接写在父Domain中
-不同Domain
-	1、反向代理Nginx
-	2、Jquery的jsonp方式请求
-	3、CROS：前端会有预检请求，后端要有CORSFilter
-	
-	
-3、CRSF跨站请求伪造和XSS攻击                
-CSRF（Cross-site request forgery）跨站请求伪造：利用了系统对页面浏览器的信任（通过cookie伪装）              
-XSS：Cross-Site Scripting（跨站脚本攻击）：XSS利用站点内的信任用户（伪装已经认证的用户）              
-Click劫持：利用了HTML中<iframe>标签的透明属性
-
-
-浏览器同源策略与跨域请求
-XSS攻击原理及防御措施
-如何使用SpringSecurity防御CSRF攻击
-CC/DDOS攻击与流量攻击
-什么是 SSL TLS HTTPS？
-
-
-Csrf Token
-用户登录时，系统发放一个CsrfToken值，用户携带该CsrfToken值与用户名、密码等参数完成登录。系统记录该会话的 CsrfToken 值，之后在用户的任何请求中，都必须带上该CsrfToken值，并由系统进行校验。
-这种方法需要与前端配合，包括存储CsrfToken值，以及在任何请求中（包括表单和Ajax）携带CsrfToken值。安全性相较于HTTP Referer提高很多，如果都是XMLHttpRequest，则可以统一添加CsrfToken值；但如果存在大量的表单和a标签，就会变得非常烦琐。
-
-SpringSecurity中使用Csrf Token
-Spring Security通过注册一个CsrfFilter来专门处理CSRF攻击，在Spring Security中，CsrfToken是一个用于描述Token值，以及验证时应当获取哪个请求参数或请求头字段的接口
+- [前端跨域问题（CORS）](#前端跨域问题（CORS）)
+    - [浏览器同源策略与跨域请求](#浏览器同源策略与跨域请求)
+    跨域定义：协议、域名、端口等，跨域是客户端浏览器独有的                
+    何为同源（同域）：如果两个页面的协议，端口（如果有指定）和域名都相同，则两个页面具有相同的源。                
+    不同源就是跨域：不同协议 ( https和http )、不同端口 ( 81和80)、不同域名 ( news和store )
+    跨域限制：安全机制，限制的行为：Cookie、LocalStorage 和 IndexDB 无法读取、DOM 无法获得、AJAX 请求不能发送                
+    浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request）。                
+    跨域解决方案：CORS                
+    CORS预检请求：OPTIONS方法，预检请求头和返回头
+    - [一次预检请求和返回](#一次预检请求和返回)
+- [Cookie跨域共享参考](#Cookie跨域共享参考)
+    跨域Cookie的解决方案：同Domain 和 不同Domain
+    同Domain
+        直接写在父Domain中
+    不同Domain
+        1、反向代理Nginx
+        2、Jquery的jsonp方式请求
+        3、CROS：前端会有预检请求，后端要有CORSFilter
+- [CRSF跨站请求伪造和XSS攻击](#CRSF跨站请求伪造和XSS攻击)
+    - [CRSF跨站请求伪造](#CRSF跨站请求伪造) : CSRF（Cross-site request forgery）跨站请求伪造：利用了系统对页面浏览器的信任（通过cookie伪装）
+    - [XSS攻击原理及防御措施](#XSS攻击原理及防御措施) : XSS：Cross-Site Scripting（跨站脚本攻击）：XSS利用站点内的信任用户（伪装已经认证的用户）
+    - [Click劫持](#Click劫持) : 利用了HTML中<iframe>标签的透明属性
+- [如何使用SpringSecurity防御CSRF攻击](#如何使用SpringSecurity防御CSRF攻击)
+- [CC攻击与DDOS攻击定义](#CC攻击与DDOS攻击定义)
 
 
 
----------------------------------------------------------------------------------------------------------------------                
+
+---------------------------------------------------------------------------------------------------------------------
+
+## 前端跨域问题（CORS）
+
+
 https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS                
 https://segmentfault.com/a/1190000006727486                
 http://www.ruanyifeng.com/blog/2016/04/cors.html                
@@ -65,7 +54,8 @@ https://blog.csdn.net/qq_31617637/article/details/72955239
                 
 跨域资源共享(CORS) 是一种机制，它使用额外的 HTTP 头来告诉浏览器  让运行在一个 origin (domain) 上的Web应用被准许访问来自不同源服务器上的指定的资源。当一个资源从与该资源本身所在的服务器不同的域、协议或端口请求一个资源时，资源会发起一个跨域 HTTP 请求。                
                 
-                
+
+### 浏览器同源策略与跨域请求
 何为同源（同域）：如果两个页面的协议，端口（如果有指定）和域名都相同，则两个页面具有相同的源。                
 不同源就是跨域：不同协议 ( https和http )、不同端口 ( 81和80)、不同域名 ( news和store )                
                 
@@ -87,7 +77,8 @@ https://blog.csdn.net/qq_31617637/article/details/72955239
 * 而非简单请求则是在使用设定的请求方式请求数据之前,先发送一个OPTIONS请求,看服务端是否允许客户端发送非简单请求。只有"预检"通过后才会再发送一次请求用于数据传输                
                 
                 
-CORS预检请求                
+### CORS预检请求
+
 预请求就是使用OPTIONS方法。跨域请求首先需要发送预请求，即使用 OPTIONS   方法发起一个预请求到服务器，以获知服务器是否允许该实际请求。预请求的使用，可以避免跨域请求对服务器的用户数据产生未预期的影响。                
                 
 跨域才会有预请求，但是不是所有跨域请求都会发送预请求的。 预请求服务器正常返回，浏览器还要判断是否合法，才会继续正常请求的。所以web服务程序需要针对options做处理，要不然OPTIONS的请求也会运行后端代码。一般预请求最好返回204(NO-Content)。                
@@ -109,7 +100,7 @@ The request was redirected to 'https://example.com/foo', which is disallowed for
                 
                 
                 
-跨域解决方案                
+### 跨域解决方案
 正如大家所知，出于安全考虑，浏览器会限制脚本中发起的跨站请求。但是为了能开发出更强大、更丰富、更安全的Web应用程序，开发人员渴望着在不丢失安全的前提下，Web 应用技术能越来越强大、越来越丰富。                
                 
 Web 应用工作组( Web Applications Working Group )推荐了一种的机制，即跨源资源共享（Cross-Origin Resource Sharing (CORS)）。                
@@ -145,11 +136,11 @@ Origin 首部字段表明预检请求或实际请求的源站。
                 
 Access-Control-Request-Method 首部字段用于预检请求。其作用是，将实际请求所使用的 HTTP 方法告诉服务器。                
 Access-Control-Request-Headers 首部字段用于预检请求。其作用是，将实际请求所携带的首部字段告诉服务器。                
-                
-                
-                
-一次预检请求和返回：                
-                
+
+
+
+### 一次预检请求和返回
+
 Access-Control-Request-Headers: appid,operid,pagecode,sign,timestamp                
 Access-Control-Request-Method: POST                
 Origin: http://test.runtime.vortex.zj.chinamobile.com:8000                
@@ -190,17 +181,18 @@ Via: 1.1 ID-5003323700051215 uproxy-2
                 
 ---------------------------------------------------------------------------------------------------------------------
 
-CRSF跨站请求伪造和XSS攻击              
+## CRSF跨站请求伪造和XSS攻击
+
 CSRF（Cross-site request forgery）跨站请求伪造：利用了系统对页面浏览器的信任（通过cookie伪装）              
 XSS：Cross-Site Scripting（跨站脚本攻击）：XSS利用站点内的信任用户（伪装已经认证的用户）              
 Click劫持：利用了HTML中<iframe>标签的透明属性              
 
-浏览器同源策略与跨域请求
-XSS攻击原理及防御措施
-如何使用SpringSecurity防御CSRF攻击
-CC/DDOS攻击与流量攻击
-什么是 SSL TLS HTTPS？
 
+[如何使用SpringSecurity防御CSRF攻击](#如何使用SpringSecurity防御CSRF攻击)
+
+
+
+### CRSF跨站请求伪造
 
 构成CSRF攻击是有条件的：              
 1、客户端必须一个网站并生成cookie凭证存储在浏览器中              
@@ -212,36 +204,6 @@ CC/DDOS攻击与流量攻击
 2、在请求地址中添加 token 并验证；              
 3、在 HTTP 头中自定义属性并验证。              
               
-              
-              
-实施XSS攻击需要具备两个条件：              
-一、需要向web页面注入恶意代码；              
-二、这些恶意代码能够被浏览器成功的执行。              
-              
-解决方法              
-1、一种方法是在表单提交或者url参数传递前，对需要的参数进行过滤,请看如下XSS过滤工具类代码              
-2、二、 过滤用户输入的 检查用户输入的内容中是否有非法内容。如<>（尖括号）、”（引号）、 ‘（单引号）、%（百分比符号）、;（分号）、()（括号）、&（& 符号）、+（加号）等。、严格控制输出              
-3、改成纯前端渲染，把代码和数据分隔开。              
-4、对 HTML 做充分转义。              
-              
-              
-
-Click劫持：
-防御
-点击劫持的根本就是目标网站被攻击者通过 iframe 内嵌在他的网页中，所以只要阻止我们的网站被 iframe 内嵌即可。
-
-1、JavaScript 禁止 iframe 内嵌
-2、X-Frame-Options HTTP 响应头禁止 iframe 内嵌
-
-X-Frame-Options 的兼容性非常好，基本上现在市面所有浏览器都支持。
-
-————————————————
-版权声明：本文为CSDN博主「xiko」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/zhoulei1995/article/details/79039142
-
-
-
-
 
 
 CSRF（Cross-site request forgery）跨站请求伪造，也被称为One Click Attack或者Session Riding，通常缩写为CSRF或XSRF，是一种对网站的恶意利用。
@@ -256,9 +218,30 @@ CSRF是一种夹持用户在已经登陆的web应用程序上执行非本意的�
 XSS是跨站脚本攻击(Cross Site Scripting)，恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页之时，嵌入其中Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。                
                 
 CSRF的全称是“跨站请求伪造”，而 XSS 的全称是“跨站脚本”。看起来有点相似，它们都是属于跨站攻击——不攻击服务器端而攻击正常访问网站的用户，但它们的攻击类型是不同维度上的分类。CSRF 顾名思义，是伪造请求，冒充用户在站内的正常操作。                
+
+
+
+CRSF参考                
+https://www.jianshu.com/p/d5423f930c73                
+https://chuenwei.github.io/2016/08/02/xss-crsf/                
+https://www.cnblogs.com/dalianpai/p/12393133.html
+
+
+
+
+
+### XSS攻击原理及防御措施
+实施XSS攻击需要具备两个条件：              
+一、需要向web页面注入恶意代码；              
+二、这些恶意代码能够被浏览器成功的执行。              
               
-              
-              
+解决方法              
+1、一种方法是在表单提交或者url参数传递前，对需要的参数进行过滤,请看如下XSS过滤工具类代码              
+2、二、 过滤用户输入的 检查用户输入的内容中是否有非法内容。如<>（尖括号）、”（引号）、 ‘（单引号）、%（百分比符号）、;（分号）、()（括号）、&（& 符号）、+（加号）等。、严格控制输出              
+3、改成纯前端渲染，把代码和数据分隔开。              
+4、对 HTML 做充分转义。  
+
+
 XSS攻击是Web攻击中最常见的攻击方法之一，它是通过对网页注入可执行代码且成功地被浏览器 执行，达到攻击的目的，形成了一次有效XSS攻击，一旦攻击成功，它可以获取用户的联系人列表，然后向联系人发送虚假诈骗信息，可以删除用户的日志等等，有时候还和其他攻击方式同时实 施比如SQL注入攻击服务器和数据库、Click劫持、相对链接劫持等实施钓鱼，它带来的危害是巨 大的，是web安全的头号大敌。              
               
               
@@ -284,6 +267,25 @@ XSS中的过滤是在前端怎么做？
                 
 
 
+浅谈XSS攻击原理与解决方法              
+https://www.cnblogs.com/shawWey/p/8480452.html              
+https://www.jianshu.com/p/4fcb4b411a66              
+https://blog.csdn.net/free_xiaochen/article/details/82289316              
+https://segmentfault.com/a/1190000016551188 
+
+
+
+### Click劫持
+防御
+点击劫持的根本就是目标网站被攻击者通过 iframe 内嵌在他的网页中，所以只要阻止我们的网站被 iframe 内嵌即可。
+
+1、JavaScript 禁止 iframe 内嵌
+2、X-Frame-Options HTTP 响应头禁止 iframe 内嵌
+
+X-Frame-Options 的兼容性非常好，基本上现在市面所有浏览器都支持。
+
+
+
 Click劫持:
 点击劫持（click jacking）也被称为 UI 覆盖攻击。它通过不可见框架底部的内容误导受害者点击，虽然受害者点击的是他所看到的网页，但其实他所点击的是被黑客精心构建的另一个置于原网页上面的透明页面。
 
@@ -297,9 +299,9 @@ Click劫持:
 
 
 
-浏览器同源策略与跨域请求
-XSS攻击原理及防御措施
-如何使用SpringSecurity防御CSRF攻击
+
+---------------------------------------------------------------------------------------------------------------------
+## 如何使用SpringSecurity防御CSRF攻击
 
 Csrf Token
 用户登录时，系统发放一个CsrfToken值，用户携带该CsrfToken值与用户名、密码等参数完成登录。系统记录该会话的 CsrfToken 值，之后在用户的任何请求中，都必须带上该CsrfToken值，并由系统进行校验。
@@ -309,6 +311,15 @@ SpringSecurity中使用Csrf Token
 Spring Security通过注册一个CsrfFilter来专门处理CSRF攻击，在Spring Security中，CsrfToken是一个用于描述Token值，以及验证时应当获取哪个请求参数或请求头字段的接口
 
 
+
+详解如何在spring boot中使用spring security防止CSRF攻击
+https://www.cnblogs.com/dalianpai/p/12393133.html
+https://www.jb51.net/article/139595.htm
+
+
+
+---------------------------------------------------------------------------------------------------------------------
+## CC攻击与DDOS攻击定义
 
 CC/DDOS攻击与流量攻击
 CC攻击与DDOS攻击定义
@@ -322,8 +333,6 @@ ACK FLOOD攻击
 Burpsuite的介绍与安装
 
 
-
-CC攻击与DDOS攻击定义：
 DDoS全称:分布式拒绝服务(DDoS:Distributed Denial of Service)。
 CC攻击全称Challenge Collapsar，中文意思是挑战黑洞，因为以前的抵抗DDoS攻击的安全设备叫黑洞，顾名思义挑战黑洞就是说黑洞拿这种攻击没办法，新一代的抗DDoS设备已经改名为ADS(Anti-DDoS System)，基本上已经可以完美的抵御CC攻击了。
 
@@ -408,31 +417,6 @@ ack flood攻击同样是利用TCP三次握手的缺陷实现的攻击， ack flo
 
 
 
-什么是 SSL TLS HTTPS？
-参考
-http和http2的区别.md
-
-
-
-
-CRSF参考                
-https://www.jianshu.com/p/d5423f930c73                
-https://chuenwei.github.io/2016/08/02/xss-crsf/                
-https://www.cnblogs.com/dalianpai/p/12393133.html
-
-
-浅谈XSS攻击原理与解决方法              
-https://www.cnblogs.com/shawWey/p/8480452.html              
-https://www.jianshu.com/p/4fcb4b411a66              
-https://blog.csdn.net/free_xiaochen/article/details/82289316              
-https://segmentfault.com/a/1190000016551188              
-
-
-
-详解如何在spring boot中使用spring security防止CSRF攻击
-https://www.cnblogs.com/dalianpai/p/12393133.html
-https://www.jb51.net/article/139595.htm
-
 
 每秒百万级CC攻击—-DDOS 防御事件
 https://www.hi-linux.com/posts/50873.html#%E6%97%A0%E7%BA%BF-ddos-%E6%94%BB%E5%87%BB
@@ -466,8 +450,13 @@ Burp Suite 是用于攻击web 应用程序的集成平台。它包含了许多�
 参考
 https://zhuanlan.zhihu.com/p/22369250
 
+
+
+
+
+
 ---------------------------------------------------------------------------------------------------------------------                
-cookie跨域共享参考                
+## Cookie跨域共享参考                
                 
 https://www.cnblogs.com/1020182600HENG/p/7121148.html                
 http://byteliu.com/2019/04/11/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB-CORS-%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/                
@@ -493,7 +482,6 @@ header(“Access-Control-Allow-Origin: http://account.tcs-y.com");
                 
                 
                 
----------------------------------------------------------------------------------------------------------------------                
-                
-                
-                
+---------------------------------------------------------------------------------------------------------------------
+
+

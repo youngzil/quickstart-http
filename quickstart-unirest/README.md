@@ -32,3 +32,7 @@ https://github.com/Kong/unirest-java
 .field用于设置post的参数，也可以直接用一个map,.fields(prams)    //prams是一个map，put了很多参数进去，和直接多个fields一样的效果
 返回的结果打印一般用，response.getBody( ).getObject( )    得到的JSON对象，之后的JSON解析出需要的内容都是以此为基础分层剥离。
 返回的状态用response.getStatus(),即返回的状态码，注意有个别成功码并不一样，如前台是200，后台是302
+
+
+
+
