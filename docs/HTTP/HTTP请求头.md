@@ -165,7 +165,7 @@ https://www.cnblogs.com/yunlongaimeng/p/9802003.html
 HTTP请求头via
 
 via 值为: 下面是一些Demo
-WTP/1.1 GDSZ-PS-GW010-WAP05.gd.chinamobile.com (Nokia WAP Gateway 4.0 CD3/ECD13_C/NWG4.0 CD3 ECD13_C 4.1.03)
+WTP/1.1 GDSZ-PS-GW010-WAP05.gd.test.com (Nokia WAP Gateway 4.0 CD3/ECD13_C/NWG4.0 CD3 ECD13_C 4.1.03)
 
 Via：1.0 236-81.D07071953.sina.com.cn:80 (squid/2.6.STABLE13)
          1.0 squid76:80 (squid/2.6.STABLE22)

@@ -143,8 +143,8 @@ Access-Control-Request-Headers 首部字段用于预检请求。其作用是，�
 
 Access-Control-Request-Headers: appid,operid,pagecode,sign,timestamp                
 Access-Control-Request-Method: POST                
-Origin: http://test.runtime.vortex.zj.chinamobile.com:8000                
-Referer:http://test.runtime.vortex.zj.chinamobile.com:8000/home                
+Origin: http://test.runtime.vortex.zj.test.com:8000                
+Referer:http://test.runtime.vortex.zj.test.com:8000/home                
                 
                 
 Date:Wed, 30 Nov 2011 02:13:21 GMT                
@@ -152,7 +152,7 @@ Server:Jetty(7.5.4.v20111024)
 Access-Control-Allow-Credentials: true                
 Access-Control-Allow-Headers: X-Requested-With,Content-Type,Accept,Origin,appId,appid,operId,operid,sign,timestamp,method,format,version,accessToken,accesstoken,openId,openid,busiSerial,busiserial,pageCode,pagecode                
 Access-Control-Allow-Methods: GET,POST,HEAD,PUT                
-Access-Control-Allow-Origin: http://test.runtime.vortex.zj.chinamobile.com:8000                
+Access-Control-Allow-Origin: http://test.runtime.vortex.zj.test.com:8000                
 Access-Control-Max-Age: 1800                
 Allow:POST,GET,OPTIONS,HEAD                
 Content-Length:59                
@@ -161,7 +161,7 @@ Last-Modified: ???, 29 ?? 2019 11:51:17 CST
                 
                 
 Date: Sat, 12 Oct 2019 09:38:57 GMT                
-access-control-allow-origin: http://test.runtime.vortex.zj.chinamobile.com:8000                
+access-control-allow-origin: http://test.runtime.vortex.zj.test.com:8000                
 vary: origin                
 access-control-allow-methods: HEAD,POST,GET,PUT                
 access-control-allow-headers: "X-Requested-With,Content-Type,Accept,Origin,appId,appid,operId,operid,sign,timestamp,method,format,version,accessToken,accesstoken,openId,openid,busiSerial,busiserial,pageCode,pagecode"                
