@@ -42,17 +42,18 @@ TCP与UDP区别总结：
 4、每一条TCP连接只能是点到点的;UDP支持一对一，一对多，多对一和多对多的交互通信  
 5、TCP首部开销20字节;UDP的首部开销小，只有8个字节  
 6、TCP的逻辑通信信道是全双工的可靠信道，UDP则是不可靠信道  
-  
-  
-  
-  
+
+
+
+
 参考  
 https://blog.csdn.net/Li_Ning_/article/details/52117463  
 https://zhuanlan.zhihu.com/p/24860273  
 https://blog.csdn.net/u013346007/article/details/75116999  
 https://blog.csdn.net/qq_18425655/article/details/51955674  
-  
-  
+
+
+
 ---------------------------------------------------------------------------------------------------------------------  
   
   

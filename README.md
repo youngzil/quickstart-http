@@ -35,7 +35,7 @@
 
 - 其他网络设计
     - [高性能短链设计](docs/其他网络设计/高性能短链设计.md)
-    - [Connection reset by peer的常见原因及解决办法](docs/其他网络设计/Connection reset by peer的常见原因及解决办法.md)
+    - [Connection reset by peer的常见原因及解决办法](docs/其他网络设计/Connection%20reset的常见原因及解决办法.md)
     - [Cookie的SameSite属性](docs/Cookie的SameSite属性.md)
     - [CORS跨域请求](docs/CORS跨域请求.md)
     - [RFC3986之URL编码与解码](docs/RFC3986之URL编码与解码.md)

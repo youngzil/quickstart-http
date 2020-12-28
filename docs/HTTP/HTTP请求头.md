@@ -169,7 +169,7 @@ WTP/1.1 GDSZ-PS-GW010-WAP05.gd.test.com (Nokia WAP Gateway 4.0 CD3/ECD13_C/NWG4.
 
 Via：1.0 236-81.D07071953.sina.com.cn:80 (squid/2.6.STABLE13)
          1.0 squid76:80 (squid/2.6.STABLE22)
- 
+
 
 下面是解释
 
@@ -180,6 +180,14 @@ Via：1.0 236-81.D07071953.sina.com.cn:80 (squid/2.6.STABLE13)
 例如：Via：1.0 236-81.D07071953.sina.com.cn:80 (squid/2.6.STABLE13)
 
 ---------------------------------------------------------------------------------------------------------------------  
+
+
+
+HTTP 请求头 Accept-Encoding 会将客户端能够理解的内容编码方式——通常是某种压缩算法——进行通知（给服务端）。通过内容协商的方式，服务端会选择一个客户端提议的方式，使用并在响应头 Content-Encoding 中通知客户端该选择。
+
+
+
+[Accept-Encoding](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Accept-Encoding)  
 
 
 
