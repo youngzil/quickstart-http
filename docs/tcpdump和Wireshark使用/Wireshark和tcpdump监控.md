@@ -1,4 +1,5 @@
 - [tcpdump安装](#Tcpdump安装)
+- [Tcpdump命令说明](#Tcpdump命令说明)
 - [tcpdump命令和使用](#Tcpdump命令和使用)
 - [tcpdump原理分析](#Tcpdump原理分析)
 - [tcpdump和Wireshark网站](#Tcpdump和Wireshark网站)
@@ -38,6 +39,131 @@ make && make install
 
 参考 [tcpdump安装配置及抓包分析](https://blog.csdn.net/small____fish/article/details/51360991)
 
+
+
+---------------------------------------------------------------------------------------------------------------------
+## Tcpdump命令说明
+
+选项
+tcpdump 的选项也很多，要想知道所有选项的话，请参考 man tcpdump，下面只记录 tcpdump 最常用的选项。
+
+需要注意的是，tcpdump 默认只会截取前 96 字节的内容，要想截取所有的报文内容，可以使用 -s number， number 就是你要截取的报文字节数，如果是 0 的话，表示截取报文全部内容。
+
+
+- -n 表示不要解析域名，直接显示 ip。
+- -nn 不要解析域名和端口
+- -X 同时用 hex 和 ascii 显示报文的内容。
+- -XX 同 -X，但同时显示以太网头部。
+- -S 显示绝对的序列号（sequence number），而不是相对编号。
+- -i any 监听所有的网卡
+- -v, -vv, -vvv：显示更多的详细信息
+- -c number: 截取 number 个报文，然后结束
+- -A： 只使用 ascii 打印报文的全部数据，不要和 -X 一起使用。截取 http 请求的时候可以用 sudo tcpdump -nSA port 80！
+
+
+简单使用
+
+1. tcpdump -nS
+   监听所有端口，直接显示 ip 地址。
+
+2. tcpdump -nnvvS
+   显示更详细的数据报文，包括 tos, ttl, checksum 等。
+
+3. tcpdump -nnvvXS
+   显示数据报的全部数据信息，用 hex 和 ascii 两列对比输出。
+
+比如：
+
+sudo tcpdump -nnvXSs 0 -c2 icmp
+
+
+tcpdump port 8080 -X -XX -S
+
+
+
+
+### 过滤器
+
+过滤器也可以简单地分为三类：type, dir 和 proto。
+
+Type 让你区分报文的类型，主要由 host（主机）, net（网络） 和 port（端口） 组成。src 和 dst 也可以用来过滤报文的源地址和目的地址。
+
+
+host: 过滤某个主机的数据报文
+tcpdump host 1.2.3.4
+
+src, dst: 过滤源地址和目的地址
+tcpdump src 2.3.4.5
+tcpdump dst 3.4.5.6
+
+net: 过滤某个网段的数据，CIDR 模式
+tcpdump net 1.2.3.0/24
+
+proto: 过滤某个协议的数据，支持 tcp, udp 和 icmp。使用的时候可以省略 proto 关键字。
+tcpdump icmp
+
+port: 过滤通过某个端口的数据报
+tcpdump port 3389
+
+src/dst, port, protocol: 结合三者
+tcpdump src port 1025 and tcp
+tcpdump udp and src port 53
+
+此外还有指定端口和数据报文范围的过滤器：
+
+port 范围
+tcpdump portrange 21-23
+
+数据报大小，单位是字节
+tcpdump less 32
+tcpdump greater 128
+tcpdump > 32
+tcpdump <= 128
+
+过于过滤器的更多详细信息，请访问 tcpdump 官方 map page 的 [PCAP-FILTER 部分](http://www.tcpdump.org/manpages/pcap-filter.7.html)
+
+
+
+
+### 输出到文件
+
+使用 tcpdump 截取数据报文的时候，默认会打印到屏幕的默认输出，你会看到按照顺序和格式，很多的数据一行行快速闪过，根本来不及看清楚所有的内容。不过，tcpdump 提供了把截取的数据保存到文件的功能，以便后面使用其他图形工具（比如 wireshark，Snort）来分析。
+
+-w 选项用来把数据报文输出到文件，比如下面的命令就是把所有 80 端口的数据导入到文件
+# sudo tcpdump -w capture_file.pcap port 80
+
+-r 可以读取文件里的数据报文，显示到屏幕上。
+# tcpdump -nXr capture_file.pcap host web30
+
+NOTE：保存到文件的数据不是屏幕上看到的文件信息，而是包含了额外信息的固定格式 pcap，需要特殊的软件来查看，使用 vim 或者 cat 命令会出现乱码。
+
+
+
+
+### 强大的过滤器
+
+过滤的真正强大之处在于你可以随意组合它们，而连接它们的逻辑就是常用的 与/AND/&& 、 或/OR/|| 和 非/not/!。
+
+
+源地址是 10.5.2.3，目的端口是 3389 的数据报
+tcpdump -nnvS src 10.5.2.3 and dst port 3389
+
+从 192.168 网段到 10 或者 172.16 网段的数据报
+tcpdump -nvX src net 192.168.0.0/16 and dat net 10.0.0.0/8 or 172.16.0.0/16
+
+从 Mars 或者 Pluto 发出的数据报，并且目的端口不是 22
+tcpdump -vv src mars or pluto and not dat port 22
+
+从上面的例子就可以看出，你可以随意地组合之前的过滤器来截取自己期望的数据报，最重要的就是知道自己要精确匹配的数据室怎样的！
+
+对于比较复杂的过滤器表达式，为了逻辑的清晰，可以使用括号。不过默认情况下，tcpdump 把 () 当做特殊的字符，所以必须使用单引号 ' 来消除歧义：
+
+tcpdump -nvv -c 20 'src 10.0.2.4 and (dat port 3389 or 22)'
+
+
+[抓包神器 tcpdump 使用介绍](https://cizixs.com/2015/03/12/tcpdump-introduction/)  
+[超详细的网络抓包神器 tcpdump 使用指南](https://juejin.cn/post/6844904084168769549)  
+[tcpdump使用](https://tonydeng.github.io/sdn-handbook/linux/tcpdump.html)  
 
 
 ---------------------------------------------------------------------------------------------------------------------
