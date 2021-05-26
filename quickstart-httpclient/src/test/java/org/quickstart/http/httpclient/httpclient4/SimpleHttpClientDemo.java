@@ -1,7 +1,7 @@
 /**
  * 项目名称：quickstart-http-httpclient 文件名：SimpleHttpClientDemo.java 版本信息： 日期：2018年4月23日 Copyright yangzl Corporation 2018 版权所有 *
  */
-package org.quickstart.http.httpclient.httpcomponents;
+package org.quickstart.http.httpclient.httpclient4;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -12,10 +12,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;

@@ -6,7 +6,7 @@
  * Copyright yangzl Corporation 2018
  * 版权所有 *
  */
-package org.quickstart.http.httpclient.commons;
+package org.quickstart.http.httpclient.httpclient3;
 
 import java.io.IOException;
 

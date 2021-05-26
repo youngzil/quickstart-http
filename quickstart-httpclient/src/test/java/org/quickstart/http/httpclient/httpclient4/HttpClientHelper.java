@@ -6,7 +6,7 @@
  * Copyright yangzl Corporation 2018
  * 版权所有 *
  */
-package org.quickstart.http.httpclient.httpcomponents;
+package org.quickstart.http.httpclient.httpclient4;
 
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
