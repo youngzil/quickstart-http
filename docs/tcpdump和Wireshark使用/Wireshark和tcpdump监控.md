@@ -1,8 +1,10 @@
-- [tcpdump安装](#Tcpdump安装)
+- [Tcpdump安装](#Tcpdump安装)
 - [Tcpdump命令说明](#Tcpdump命令说明)
-- [tcpdump命令和使用](#Tcpdump命令和使用)
-- [tcpdump原理分析](#Tcpdump原理分析)
-- [tcpdump和Wireshark网站](#Tcpdump和Wireshark网站)
+- [Tcpdump命令和使用](#Tcpdump命令和使用)
+- [Tcpdump原理分析](#Tcpdump原理分析)
+- [Tcpdump介绍](#Tcpdump介绍)
+- [Wireshark介绍](#Wireshark介绍)
+- [如何快速获取抓包文件中HTTP请求的响应时间](#如何快速获取抓包文件中HTTP请求的响应时间)
 - [使用Tcpdump和Wireshark抓包分析](#使用Tcpdump和Wireshark抓包分析)
     - [一次完整HTTP请求流程的抓包记录和分析](#一次完整HTTP请求流程的抓包记录和分析)
     - [HAProxy心跳检查问题](#HAProxy心跳检查问题)
@@ -252,18 +254,10 @@ Wireshark是一个网络协议检测工具，支持Windows平台、Unix平台、
 
 
 ---------------------------------------------------------------------------------------------------------------------
-## Tcpdump和Wireshark网站
+## Tcpdump介绍
 
 
 [tcpdump官网](https://www.tcpdump.org/)
-
-
-
-[Wireshark下载](https://www.wireshark.org/download.html)
-[Wireshark Github](https://github.com/wireshark/wireshark)
-
-
-
 
 tcpdump：
 保存到target.cap文件，可以使用Wireshark打开文件
@@ -282,9 +276,106 @@ tcpdump使用
 https://www.cnblogs.com/ggjucheng/archive/2012/01/14/2322659.html
 
 
-wireshark 实用过滤表达式  
-https://blog.csdn.net/aflyeaglenku/article/details/50884296
-https://blog.csdn.net/panda62/article/details/80279732
+
+---------------------------------------------------------------------------------------------------------------------
+## Wireshark介绍
+
+[Wireshark官网](https://www.wireshark.org/)  
+[Wireshark Github](https://github.com/wireshark/wireshark)  
+
+
+
+
+
+[Wireshark中文使用教程（用户版）](https://www.wangan.com/docs/wiresharkuser)  
+[wireshark抓包新手使用教程](https://www.cnblogs.com/linyfeng/p/9496126.html)  
+
+
+
+### Wireshark实用过滤表达式  
+
+[wireshark过滤规则及使用方法](https://blog.csdn.net/panda62/article/details/80279732)  
+[wireshark 实用过滤表达式（针对ip、协议、端口、长度和内容）](https://blog.csdn.net/aflyeaglenku/article/details/50884296)  
+[WireShark 过滤http请求](https://blog.csdn.net/zzy0609/article/details/95455136)  
+[]()  
+
+
+http.host==magentonotes.com
+http.host contains magentonotes.com
+//过滤经过指定域名的http数据包，这里的host值不一定是请求中的域名
+
+http.response.code==302
+//过滤http响应状态码为302的数据包
+
+http.response==1
+//过滤所有的http响应包
+
+http.request==1
+//过滤所有的http请求，貌似也可以使用http.request
+
+http.request.method==POST
+//wireshark过滤所有请求方式为POST的http请求包，注意POST为大写
+
+http.cookie contains guid
+//过滤含有指定cookie的http数据包
+
+http.request.uri==”/online/setpoint”
+//过滤请求的uri，取值是域名后的部分
+
+http.request.full_uri==” http://task.browser.360.cn/online/setpoint”
+//过滤含域名的整个url则需要使用http.request.full_uri
+
+http.server contains “nginx”
+//过滤http头中server字段含有nginx字符的数据包
+
+http.content_type == “text/html”
+//过滤content_type是text/html的http响应、post包，即根据文件类型过滤http数据包
+
+http.content_encoding == “gzip”
+//过滤content_encoding是gzip的http包
+
+http.transfer_encoding == “chunked”
+//根据transfer_encoding过滤
+
+http.content_length == 279
+http.content_length_header == “279″
+//根据content_length的数值过滤
+
+http.server
+//过滤所有含有http头中含有server字段的数据包
+
+http.request.version == “HTTP/1.1″
+//过滤HTTP/1.1版本的http包，包括请求和响应
+
+http.response.phrase == “OK”
+//过滤http响应中的phrase
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------
+## 如何快速获取抓包文件中HTTP请求的响应时间
+
+
+[如何快速获取抓包文件中HTTP请求的响应时间](https://cloud.tencent.com/developer/article/1657425)  
+[Wireshark查看http响应时间的统计图](https://gmd20.github.io/blog/wireshark%E6%9F%A5%E7%9C%8Bhttp%E5%93%8D%E5%BA%94%E6%97%B6%E9%97%B4%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%9B%BE/)  
+[]()  
+[]()  
+[]()  
+[]()  
+
+
+
+## 用Wireshark抓包分析超过70秒的请求
+
+[用Wireshark抓包分析超过70秒的请求](https://www.cnblogs.com/cmt/p/3789182.html)  
+[Wireshark抓包分析一个耗时20秒的请求](https://blog.csdn.net/wuxing26jiayou/article/details/79855306)  
+[]()  
+[]()  
+[]()  
 
 
 ---------------------------------------------------------------------------------------------------------------------
@@ -324,6 +415,11 @@ https://blog.csdn.net/panda62/article/details/80279732
 2. 9001 → 60139 [ACK] Seq=6702 Ack=366 Win=407936 Len=0 TSval=925469619 TSecr=925469619  
 3. 9001 → 60139 [FIN, ACK] Seq=6702 Ack=366 Win=407936 Len=0 TSval=925469619 TSecr=925469619  
 4. 60139 → 9001 [ACK] Seq=366 Ack=6703 Win=401536 Len=0 TSval=925469619 TSecr=925469619  
+
+
+[使用WireShark查看TCP连接和断开过程](https://blog.csdn.net/yuanjize1996/article/details/83317436)
+[TCP ------ 抓包分析（seq ack）](https://www.cnblogs.com/god-of-death/p/7905817.html)
+
 
 
 
