@@ -3,7 +3,7 @@
 - [RAML介绍](#RAML介绍)
 - [AMF介绍](#AMF介绍)
 - [AsyncAPI介绍](#AsyncAPI介绍)
-- [JSON Schema介绍](#JSON-Schema介绍)
+- [JSON Schema介绍](https://github.com/youngzil/quickstart-framework/blob/master/quickstart-json/docs/JSON%20Schema.md)
 
 
 ---------------------------------------------------------------------------------------------------------------------
@@ -198,25 +198,6 @@ AsyncAPI 规范允许您创建异步 API 的机器可读定义。
 []()  
 []()  
 
-
----------------------------------------------------------------------------------------------------------------------
-## JSON Schema介绍
-
-JSON Schema is a vocabulary that allows you to annotate and validate JSON documents.
-
-JSON Schema 是一个词汇表，允许您注释和验证 JSON 文档。
-
-
-[JSON Schema官网](https://json-schema.org/)  
-[JSON Schema Specification](https://json-schema.org/specification.html)  
-[JSON Schema Specification Github](https://github.com/json-schema-org/json-schema-spec)  
-
-[理解JSON模式](https://json-schema.org/understanding-json-schema/index.html)  
-[理解JSON模式 Github](https://github.com/json-schema-org/understanding-json-schema)  
-
-[]()  
-[]()  
-[]()  
 
 
 
