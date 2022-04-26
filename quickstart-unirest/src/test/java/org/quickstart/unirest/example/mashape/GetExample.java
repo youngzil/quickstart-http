@@ -6,7 +6,7 @@
  * Copyright yangzl Corporation 2017
  * 版权所有 *
  */
-package org.quickstart.unirest.example;
+package org.quickstart.unirest.example.mashape;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

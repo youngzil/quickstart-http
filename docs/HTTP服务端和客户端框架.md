@@ -12,12 +12,12 @@ quickserver
 
 
 客户端框架
-JDK java.net.URL
+JDK自带的httpurlconnection java.net.URL
 Feign
 Okhttp
 Unirest
 jersey-client
-httpclient
+apache的httpcomponent
 AsyncHttpClient
 
 

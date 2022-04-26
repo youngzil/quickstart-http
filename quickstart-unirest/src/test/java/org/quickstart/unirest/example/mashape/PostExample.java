@@ -6,7 +6,7 @@
  * Copyright yangzl Corporation 2017
  * 版权所有 *
  */
-package org.quickstart.unirest.example;
+package org.quickstart.unirest.example.mashape;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,7 +27,6 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.async.Callback;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import com.mashape.unirest.request.GetRequest;
 import com.mashape.unirest.request.HttpRequestWithBody;
 
 /**

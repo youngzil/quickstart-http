@@ -1,10 +1,24 @@
 Java中的Unirest：简化的轻量级HTTP客户端库。 
-http://kong.github.io/unirest-java/
 
 
 http://unirest.io/java.html
-https://github.com/Kong/unirest-java
 测试使用quickstart-httpserver作为服务端
+
+
+
+基于apache httpcomponent的，unirest-java的github地址为https://github.com/kong/unirest-java/，其另外一个很牛逼的开源产品就是微服务的api网关kong
+
+[unirest-java文档](http://kong.github.io/unirest-java/)
+[unirest-java Github](https://github.com/Kong/unirest-java)
+[unirest-java 使用示例](https://www.baeldung.com/unirest)
+
+老的版本是2016停更，最新版本是1.4.9，包路径是com.mashape.unirest.
+新的版本包路径是kong.unirest.
+
+
+
+
+
 
 
 响应  
