@@ -31,7 +31,8 @@ public class GetExample {
     public static void main(String[] args) throws UnirestException {
         Unirest.get("http://httpbin.org/{method}").routeParam("method", "get").queryString("name", "Mark").asJson();
 
-        HttpResponse<String> response = Unirest.get("http://www.baidu.com").header("User-Agent", USER_AGENT).asString();
+        // HttpResponse<String> response = Unirest.get("http://www.baidu.com").header("User-Agent", USER_AGENT).asString();
+        HttpResponse<String> response = Unirest.get("http://127.0.0.1:8081/hermes-center/metrics/topic").header("User-Agent", USER_AGENT).asString();
         System.out.println(response.getBody());
     }
 

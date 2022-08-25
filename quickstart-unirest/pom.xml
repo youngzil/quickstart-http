@@ -24,10 +24,10 @@
 
     <dependencies>
 
-       <!-- <dependency>
+        <dependency>
             <groupId>com.mashape.unirest</groupId>
             <artifactId>unirest-java</artifactId>
-        </dependency>-->
+        </dependency>
 
         <dependency>
             <groupId>com.konghq</groupId>
